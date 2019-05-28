@@ -6,3 +6,5 @@ edition = "2018"
 
 [dependencies]
 rand = "0.6.5"
+slack_api = "0.21.0"
+dotenv = "0.14.1"

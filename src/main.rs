@@ -3,16 +3,6 @@ use dotenv::dotenv;
 
 fn main() {
     dotenv().ok();
-    let channel_memebers = vec!["Hatef",
-                                 "Connor", 
-                                 "Nigel", 
-                                 "Jono", 
-                                 "Jon", 
-                                 "Kevin",
-                                 "Holly",
-                                 "Olivia",
-                                 "Geordie",
-                                 "Suzanne"];
 
     let restaurant_names = vec!["Pho", "Argos", "Soosh", "RailTown", "Bao", "BrewHall"];
     let n_groups = 3;
@@ -24,16 +14,13 @@ fn main() {
     // println!("{:?}", AUTH_TOKEN);
 
 
-    let mut slack: happy_lunch_mates::slack_driver::SlackDriver = happy_lunch_mates::slack_driver::SlackDriver::new();
+    let mut slack: happy_lunch_mates::slack_driver::SlackDriver = happy_lunch_mates::slack_driver::SlackDriver::new(&channel_name);
 
-    println!("{:?}", slack._get_users_list());
-
-    // println!("channel members: {:?}", slack.channel_members);
+    let channel_memebers = slack.get_members_from_channel();
 
     // let mut hlm_test: happy_lunch_mates::HappyLunchMates = happy_lunch_mates::HappyLunchMates::new(&slack, &n_groups, &restaurant_names);
 
-    // hlm_test.assign_to_group();
-
+    // hlm_test.assign_to_group(); 
 
 }
 

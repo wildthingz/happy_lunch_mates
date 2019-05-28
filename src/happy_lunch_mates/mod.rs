@@ -3,12 +3,12 @@ use rand::seq::SliceRandom;
 
 pub mod slack_driver;
 
-#[derive(Debug)]
-pub struct HappyLunchMates<'hlm> {
-    slack_client: slack_driver::SlackDriver,
-    n_groups: u8,
-    restaurant_names: Vec<&'hlm str>
-}
+// #[derive(Debug)]
+// pub struct HappyLunchMates<'hlm> {
+//     slack_client: &'hlm slack_driver::SlackDriver,
+//     n_groups: u8,
+//     restaurant_names: Vec<&'hlm str>
+// }
 
 // impl<'hlm> HappyLunchMates<'hlm> {
 //     pub fn new (slack_channel: &'hlm slack_driver::SlackDriver, n_groups: &u8, restaurant_names: &Vec<&'hlm str>) -> HappyLunchMates<'hlm> {

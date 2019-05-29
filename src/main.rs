@@ -5,7 +5,7 @@ fn main() {
     dotenv().ok();
 
     let restaurant_names = vec!["Pho", "Argos", "Soosh", "RailTown", "Bao", "BrewHall"];
-    let n_groups = 3;
+    let n_groups = 5;
 
     let channel_name: &str = "lunch-crew";
 

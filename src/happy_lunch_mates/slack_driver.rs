@@ -19,7 +19,9 @@ impl<'sd> SlackDriver<'sd> {
 
         let channels_list: Vec<slack::Channel> = SlackDriver::_get_channels_list(&client, &token);
         let users_list: Vec<slack::User> = SlackDriver::_get_users_list(&client, &token);
-        let members_list: Vec<String> = SlackDriver::_get_members_from_channel(&channels_list, &users_list, channel_name);
+        let members_list: Vec<String> = SlackDriver::_get_members_from_channel(&channels_list, 
+                                                                                &users_list, 
+                                                                                channel_name);
 
         SlackDriver {
             slack_client: client,
@@ -29,7 +31,9 @@ impl<'sd> SlackDriver<'sd> {
         }
     }
 
-    fn _get_members_from_channel(channels_list: &Vec<slack::Channel>, users_list: &Vec<slack::User>, channel_name: &str) -> Vec<String>{
+    fn _get_members_from_channel(channels_list: &Vec<slack::Channel>, 
+                                users_list: &Vec<slack::User>, 
+                                channel_name: &str) -> Vec<String>{
 
         let mut user_id_list_in_channel: Vec<String> = Vec::new();
 

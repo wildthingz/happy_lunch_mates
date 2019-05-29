@@ -11,11 +11,16 @@ pub struct HappyLunchMates<'hlm> {
 }
 
 impl<'hlm> HappyLunchMates<'hlm> {
-    pub fn new (slack_channel: &'hlm slack_driver::SlackDriver, n_groups: &u8, restaurant_names: &Vec<&'hlm str>) -> HappyLunchMates<'hlm> {
+    pub fn new (slack_channel: &'hlm slack_driver::SlackDriver, 
+                n_groups: &u8, 
+                restaurant_names: &Vec<&'hlm str>) -> HappyLunchMates<'hlm> {
+                    
         let mut number_group: u8 = *n_groups;
         if  (slack_channel.members_list.len() as f32 / number_group as f32) < 1.3 {
             let new_n_group: f32 = slack_channel.members_list.len() as f32 / 1.3;
-            println!("WARNING: number of groups, {}, is too high. It is autoimatically set to {:?}", n_groups, new_n_group as u8);
+            println!("WARNING: number of groups, {}, is too high. It is autoimatically set to {:?}", 
+                    n_groups, new_n_group as u8);
+
             number_group = new_n_group as u8;
         }
         HappyLunchMates {

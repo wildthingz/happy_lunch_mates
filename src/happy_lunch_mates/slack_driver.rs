@@ -1,6 +1,9 @@
 use std::vec::Vec;
 extern crate slack_api as slack;
 
+extern crate names;
+use names::{Generator, Name};
+
 // use dotenv::dotenv;
 // use slack::requests::{Error, Client};
 
@@ -85,6 +88,7 @@ impl<'sd> SlackDriver<'sd> {
     }
 
     pub fn send_message(&self, message: &str) {
+        let username: &str = &SlackDriver::_werid_channel_names().to_owned()[..];
         let postmessage = slack::chat::PostMessageRequest{
                                     channel: &self.channel_name, 
                                     text   : message,
@@ -93,7 +97,7 @@ impl<'sd> SlackDriver<'sd> {
                                     attachments: None,
                                     unfurl_links: None,
                                     unfurl_media: None,
-                                    username: "poop".into(),
+                                    username: username.into(),
                                     as_user: false.into(),
                                     icon_url: None,
                                     icon_emoji: None,
@@ -109,5 +113,11 @@ impl<'sd> SlackDriver<'sd> {
         } else {
         println!("Response not OK: {:?}", response);
         }
+    }
+
+    fn _werid_channel_names() -> String {
+        let mut generator = Generator::with_naming(Name::Plain);
+        return generator.next().unwrap();
+
     }
 }

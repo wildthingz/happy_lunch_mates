@@ -77,3 +77,10 @@ impl<'hlm> HappyLunchMates<'hlm> {
 
     }
 }
+
+// make a suggestion class
+/*  struct suggestion {
+        group_members: Vec<String>,
+        suggested_restaurant: &str
+    }
+*/

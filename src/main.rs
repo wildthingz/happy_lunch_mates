@@ -20,13 +20,14 @@ fn main() {
 
     let groups = hlm_test.assign_to_group(); 
 
-    let mut test: String;
-    slack.send_message("Groups are as follows: ");
+    let mut test: String = "Groups are as follows: \n ".to_string();
+    // slack.send_message("Groups are as follows: \n");
     for (i, group) in groups.iter().enumerate() {
-        test = format!("group {0:?} is: {1:?}", i, group.to_vec().join(" and "));
-        slack.send_message(&test);
+        test.push_str(&format!("group {0:?} is: {1:?} \n ", i, group.to_vec().join(" and ")));
+        
     }
-
+    slack.send_message(&test);
+    println!("{:?}", test);
 }
 
 

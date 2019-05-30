@@ -30,7 +30,7 @@ impl<'hlm> HappyLunchMates<'hlm> {
         }
     }
 
-    pub fn assign_to_group(&mut self){
+    pub fn assign_to_group(&mut self) -> Vec<Vec<String>>{
         // assigmenet based on random numbers
         let n_group_members: u8 = self.slack_client.members_list.len() as u8;
         let mut group_numbers: Vec<u8> = vec![0; self.n_groups as usize];
@@ -69,6 +69,11 @@ impl<'hlm> HappyLunchMates<'hlm> {
             groups.push(group);
         }
 
-        println!("groups are as follows: {:?}", groups);
+        // println!("groups are as follows: {:?}", groups);
+        return groups;
+    }
+
+    pub fn suggest_restaurant_to_groups(&self) {
+
     }
 }

@@ -5,15 +5,27 @@ fn main() {
     dotenv().ok();
 
     let restaurant_names = vec!["Pho", "Argos", "Soosh", "RailTown", "Bao", "BrewHall"];
-    let n_groups = 5;
+    let n_groups = 2;
 
-    let channel_name: &str = "lunch-crew";
+    // let channel_name: &str = "lunch-crew";
+    let channel_name: &str = "happy-lunch-mates";
+
+    let message: &str =  "HAIL RUST!!";
 
     let slack: happy_lunch_mates::slack_driver::SlackDriver = happy_lunch_mates::slack_driver::SlackDriver::new(&channel_name);
 
+    // slack.send_message(message);
+
     let mut hlm_test: happy_lunch_mates::HappyLunchMates = happy_lunch_mates::HappyLunchMates::new(&slack, &n_groups, &restaurant_names);
 
-    hlm_test.assign_to_group(); 
+    let groups = hlm_test.assign_to_group(); 
+
+    let mut test: String;
+    slack.send_message("Groups are as follows: ");
+    for (i, group) in groups.iter().enumerate() {
+        test = format!("group {0:?} is: {1:?}", i, group.to_vec().join(" and "));
+        slack.send_message(&test);
+    }
 
 }
 

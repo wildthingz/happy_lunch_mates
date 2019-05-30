@@ -64,7 +64,7 @@ impl<'sd> SlackDriver<'sd> {
                 channels_list = channels;    
             }
         } else {
-        println!("{:?}", response);
+        println!("Response not OK: {:?}", response);
         }
         return channels_list;
     }
@@ -79,8 +79,35 @@ impl<'sd> SlackDriver<'sd> {
                 users_list = users;    
             }
         } else {
-        println!("{:?}", response);
+        println!("Response not OK: {:?}", response);
         }
         return users_list;
+    }
+
+    pub fn send_message(&self, message: &str) {
+        let postmessage = slack::chat::PostMessageRequest{
+                                    channel: &self.channel_name, 
+                                    text   : message,
+                                    parse: None,
+                                    link_names: None,
+                                    attachments: None,
+                                    unfurl_links: None,
+                                    unfurl_media: None,
+                                    username: "poop".into(),
+                                    as_user: false.into(),
+                                    icon_url: None,
+                                    icon_emoji: None,
+                                    thread_ts: None,
+                                    reply_broadcast: None};
+
+        let response = slack::chat::post_message(&self.slack_client, &self.slack_token, &postmessage);
+
+        if let Ok(response) = response {
+            if let Some(message_sent) = response.message {
+                println!("message sent was: {:?}", message_sent)   
+            }
+        } else {
+        println!("Response not OK: {:?}", response);
+        }
     }
 }

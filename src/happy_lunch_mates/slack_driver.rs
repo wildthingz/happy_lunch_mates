@@ -12,7 +12,8 @@ pub struct SlackDriver<'sd> {
     slack_client: slack::requests::Client,
     slack_token : String,
     channel_name : &'sd str,
-    pub members_list : Vec<String>
+    pub members_list : Vec<String>,
+    bot_username     : String
 }
 
 impl<'sd> SlackDriver<'sd> {
@@ -25,12 +26,14 @@ impl<'sd> SlackDriver<'sd> {
         let members_list: Vec<String> = SlackDriver::_get_members_from_channel(&channels_list, 
                                                                                 &users_list, 
                                                                                 channel_name);
+        let username = SlackDriver::_werid_channel_names().to_owned()[..].to_string(); 
 
         SlackDriver {
-            slack_client: client,
-            slack_token : token,
+            slack_client : client,
+            slack_token  : token,
             channel_name : channel_name,
-            members_list : members_list
+            members_list : members_list,
+            bot_username : username
         }
     }
 
@@ -88,7 +91,9 @@ impl<'sd> SlackDriver<'sd> {
     }
 
     pub fn send_message(&self, message: &str) {
-        let username: &str = &SlackDriver::_werid_channel_names().to_owned()[..];
+
+        let username = self.bot_username.to_owned();
+        
         let postmessage = slack::chat::PostMessageRequest{
                                     channel: &self.channel_name, 
                                     text   : message,
@@ -97,7 +102,7 @@ impl<'sd> SlackDriver<'sd> {
                                     attachments: None,
                                     unfurl_links: None,
                                     unfurl_media: None,
-                                    username: username.into(),
+                                    username: (username[..]).into(),
                                     as_user: false.into(),
                                     icon_url: None,
                                     icon_emoji: None,

@@ -27,6 +27,10 @@ fn main() {
         
     }
     slack.send_message(&test);
+
+    std::thread::sleep(std::time::Duration::from_millis(5000));
+
+    slack.send_message("another test");
     println!("{:?}", test);
 }
 

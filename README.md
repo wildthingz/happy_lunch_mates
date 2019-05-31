@@ -43,6 +43,9 @@ Run `$ cargo run`
 - slack rust api: https://github.com/slack-rs/slack-rs-api
 - firebase rust : https://github.com/davidrhyswhite/rust-firebase
 
+## Short-term ideas
+- Use blockchain as a database : https://freestartupkits.com/articles/technology/cryptocurrency-news-and-tips/ultimate-rust-blockchain-tutorial/
+
 ## Future Work
 
 - Use supervised machine learning based on the gathered data to predict each group prefered restaurant.
